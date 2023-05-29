@@ -1,10 +1,22 @@
-let i = 0;
-function uuid(): number {
-  return i++;
+function uuid() {
+  var i, random;
+  var result = '';
+
+  for (i = 0; i < 32; i++) {
+    random = (Math.random() * 16) | 0;
+    if (i === 8 || i === 12 || i === 16 || i === 20) {
+      result += '-';
+    }
+    result += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(
+      16
+    );
+  }
+
+  return result;
 }
 
 export class User {
-  id: number;
+  id: string;
 
   constructor(public name: string, public avatarSrc: string) {
     this.id = uuid();
@@ -12,13 +24,13 @@ export class User {
 }
 
 export class Thread {
-  id: number;
+  id: string;
   lastMessage!: Message;
   name: string;
   avatarSrc: string;
 
   // 必须先声明所有必填参数再声明可选参数
-  constructor(name: string, avatarSrc: string, id?: number) {
+  constructor(name: string, avatarSrc: string, id?: string) {
     this.id = id || uuid();
     this.name = name;
     this.avatarSrc = avatarSrc;

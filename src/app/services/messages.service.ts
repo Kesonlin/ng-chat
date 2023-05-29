@@ -24,8 +24,12 @@ export class MessagesService {
 
   constructor() {
     this.messages = this.updates.pipe(
+      map((v) => {
+        console.log(v);
+        return v;
+      }),
       scan((messages: Message[], operation: IMessagesOperation) => {
-        // console.log('scan', messages);
+        console.log('scan', messages);
 
         return operation(messages);
       }, initialMessages),
@@ -39,13 +43,16 @@ export class MessagesService {
           // console.log('11111111', message);
 
           return (messages: Message[]) => {
-            // console.log('message', 'create', message);
+            console.log('message', 'create', message);
 
             return messages.concat(message);
           };
         })
       )
       .subscribe(this.updates);
+    // .subscribe((r) => {
+    //   console.log(r);
+    // });
 
     this.newMessages.subscribe(this.create);
 

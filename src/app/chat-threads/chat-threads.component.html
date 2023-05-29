@@ -1,1 +1,2 @@
 <p>chat-threads works!</p>
+<p *ngFor="let thread of threads | async">{{thread.name}}, {{thread.lastMessage}}</p>
