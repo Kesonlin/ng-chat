@@ -31,12 +31,18 @@ describe('MessagesService', () => {
     });
 
     service.newMessages.subscribe((message: Message) => {
-      console.log('=> newMessages: ' + message.text);
+      // console.log('=> newMessages: ' + message.text);
     });
 
     service.messages.subscribe((messages: Message[]) => {
-      console.log('=> messages length: ' + messages.length);
+      // console.log('=> messages length: ' + messages.length);
     });
+
+    // setTimeout(() => {
+    //   service.messages.subscribe((messages: Message[]) => {
+    //     console.log('settimeut', messages.length);
+    //   });
+    // });
 
     service.addMessage(m1);
     service.addMessage(m2);

@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
+  // 保存最新的值，确保最新的订阅者能够知道当前用户
   // currentUser: Subject<User> = new BehaviorSubject<User>(null);
   // constructor() {}
   // public setCurrentUser(newUser: User): void {

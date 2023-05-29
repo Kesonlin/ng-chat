@@ -20,10 +20,13 @@ export class MessagesService {
   messages: Observable<Message[]>;
   updates: Subject<any> = new Subject<any>();
   create: Subject<Message> = new Subject<Message>();
+  markThreadAsRead: Subject<any> = new Subject<any>();
 
   constructor() {
     this.messages = this.updates.pipe(
       scan((messages: Message[], operation: IMessagesOperation) => {
+        // console.log('scan', messages);
+
         return operation(messages);
       }, initialMessages),
       publishReplay(1),
@@ -33,14 +36,32 @@ export class MessagesService {
     this.create
       .pipe(
         map(function (message: Message): IMessagesOperation {
-          return (message: Message[]) => {
-            return message.concat(message);
+          // console.log('11111111', message);
+
+          return (messages: Message[]) => {
+            // console.log('message', 'create', message);
+
+            return messages.concat(message);
           };
         })
       )
       .subscribe(this.updates);
 
     this.newMessages.subscribe(this.create);
+
+    this.markThreadAsRead
+      .pipe(
+        map(
+          (thread: Thread) => (messages: Message[]) =>
+            messages.map((message: Message) => {
+              if (message.thread.id === thread.id) {
+                message.isRead = true;
+              }
+              return message;
+            })
+        )
+      )
+      .subscribe(this.updates);
   }
 
   addMessage(message: Message): void {
