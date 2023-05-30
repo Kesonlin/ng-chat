@@ -23,31 +23,19 @@ const initMessages: Message[] = [
     author: me,
     text: 'Yet let me weep for such a feeling loss.',
     thread: tLadycap,
-    sentAt: new Date(),
-  }),
-  new Message({
-    author: ladycap,
-    sentAt: new Date(),
-    text: 'So shall you feel the loss, but not the friend which you weep for.',
-    thread: tLadycap,
+    sentAt: +new Date(),
   }),
   new Message({
     author: echo,
-    sentAt: new Date(),
+    sentAt: +new Date() + 100,
     text: `I\'ll echo whatever you send me`,
     thread: tEcho,
   }),
   new Message({
     author: rev,
-    sentAt: new Date(),
+    sentAt: +new Date() + 1000,
     text: `I\'ll reverse whatever you send me`,
     thread: tRev,
-  }),
-  new Message({
-    author: wait,
-    sentAt: new Date(),
-    text: `I\'ll wait however many seconds you send to me before responding. Try sending '3'`,
-    thread: tWait,
   }),
 ];
 
@@ -64,6 +52,28 @@ export class ChatDataService {
 
       messageService.addMessage(message);
     });
+
+    setTimeout(() => {
+      messageService.addMessage(
+        new Message({
+          author: ladycap,
+          sentAt: new Date(),
+          text: 'So shall you feel the loss, but not the friend which you weep for.',
+          thread: tLadycap,
+        })
+      );
+    }, 1000);
+
+    setTimeout(() => {
+      messageService.addMessage(
+        new Message({
+          author: wait,
+          sentAt: new Date(),
+          text: `I\'ll wait however many seconds you send to me before responding. Try sending '3'`,
+          thread: tWait,
+        })
+      );
+    }, 1000);
 
     messageService.messages.subscribe((m) => {
       console.log('m', m);

@@ -11,8 +11,8 @@ describe('ThreadsService', () => {
     const nate: User = new User('Nate Murray', '');
     const felipe: User = new User('Felipe Coury', '');
 
-    const t1: Thread = new Thread('t1', 'Thread1', 1);
-    const t2: Thread = new Thread('t2', 'Thread2', 2);
+    const t1: Thread = new Thread('t1', 'Thread1');
+    const t2: Thread = new Thread('t2', 'Thread2');
 
     const m1: Message = new Message({
       author: nate,

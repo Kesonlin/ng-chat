@@ -17,7 +17,7 @@ describe('MessagesService', () => {
 
   it('should test', () => {
     const user = new User('lh', '');
-    const thread = new Thread('t1', 'lh', 1);
+    const thread = new Thread('t1', 'lh');
     const m1: Message = new Message({
       author: user,
       text: 'Hi!',
@@ -31,11 +31,11 @@ describe('MessagesService', () => {
     });
 
     service.newMessages.subscribe((message: Message) => {
-      // console.log('=> newMessages: ' + message.text);
+      console.log('=> newMessages: ' + message.text);
     });
 
     service.messages.subscribe((messages: Message[]) => {
-      // console.log('=> messages length: ' + messages.length);
+      console.log('=> messages length: ' + messages.length);
     });
 
     // setTimeout(() => {

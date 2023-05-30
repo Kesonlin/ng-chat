@@ -17,6 +17,8 @@ export class ThreadsService {
   constructor(private messagesService: MessagesService) {
     this.threads = messagesService.messages.pipe(
       map((messages: Message[]) => {
+        // console.log('thread messages', messages);
+
         const threads: { [key: string]: Thread } = {};
         messages.map((message: Message) => {
           threads[message.thread.id] =
@@ -24,7 +26,7 @@ export class ThreadsService {
           const messageThread: Thread = threads[message.thread.id];
           if (
             !messageThread.lastMessage ||
-            messageThread.lastMessage.sentAt < message.sentAt
+            +messageThread.lastMessage.sentAt < +message.sentAt
           ) {
             messageThread.lastMessage = message;
           }
@@ -36,13 +38,21 @@ export class ThreadsService {
     this.orderedThreads = this.threads.pipe(
       map((threadsGroup: { [key: string]: Thread }) => {
         const threads: Thread[] = Object.values(threadsGroup);
-        threads.sort(
-          (a: Thread, b: Thread) =>
-            +a.lastMessage.sentAt - +b.lastMessage.sentAt
-        );
+        // console.log('lllll', threads);
+
+        threads.sort((a: Thread, b: Thread) => {
+          // console.log(+a.lastMessage.sentAt, +b.lastMessage.sentAt);
+          return +b.lastMessage.sentAt - +a.lastMessage.sentAt;
+        });
+        // threads.reverse();
+        // console.log('ggggg', threads);
         return threads;
       })
     );
+
+    this.orderedThreads.subscribe((t) => {
+      console.log('tttt', t);
+    });
 
     this.currentThreadMessage = combineLatest(
       [this.currentThread, messagesService.messages],
@@ -56,6 +66,10 @@ export class ThreadsService {
         }
       }
     );
+
+    // this.currentThread.subscribe((m) => {
+    //   console.log(m);
+    // });
   }
 
   setCurrentThread(newThread: Thread): void {

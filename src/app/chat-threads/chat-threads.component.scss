@@ -1,0 +1,12 @@
+.thread-container {
+  width: 100%;
+  background-color: pink;
+  .thread-item {
+    width: 100%;
+    border: 1px solid #000;
+
+    span {
+      color: #000;
+    }
+  }
+}
