@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, combineLatest, map } from 'rxjs';
-import { Message, Thread } from './model';
-import { MessagesService } from './services/messages.service';
+import { Message, Thread } from '../model';
+import { MessagesService } from './messages.service';
 
 @Injectable({
   providedIn: 'root',

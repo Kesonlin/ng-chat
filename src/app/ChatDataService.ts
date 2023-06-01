@@ -1,7 +1,7 @@
 import { Message, Thread, User } from './model';
 import { MessagesService } from './services/messages.service';
 import { UserService } from './services/user.service';
-import { ThreadsService } from './threads.service';
+import { ThreadsService } from './services/threads.service';
 
 const me: User = new User('Juliet', 'Juliet-img');
 const ladycap: User = new User('Lady Capulet', 'Lady Capulet-img');
@@ -79,12 +79,21 @@ export class ChatDataService {
       console.log('m', m);
     });
 
-    threadService.setCurrentThread(tEcho);
+    threadService.setCurrentThread(tLadycap);
 
     this.setupBots(messageService);
   }
 
   static setupBots(messageService: MessagesService): void {
-    messageService.messageForThread;
+    messageService.messageForThread(tEcho, me).subscribe((msg: Message) => {
+      messageService.addMessage(
+        new Message({
+          author: echo,
+          sentAt: +new Date() + 100,
+          text: 'copy: ' + msg.text,
+          thread: tEcho,
+        })
+      );
+    });
   }
 }

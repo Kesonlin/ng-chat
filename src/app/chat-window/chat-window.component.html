@@ -1,3 +1,6 @@
+<span>-----current user: {{currentUser.name}}-------</span>
+<span>current thread: {{currentThread.name}}</span>
 <div class="chat-container">
-
+  <p *ngFor="let msg of messages | async">{{msg.author.name}}: {{msg.text}}</p>
 </div>
+<input type="text" [(ngModel)]="inputValue"> <button (click)="sendMsg()">send </button>

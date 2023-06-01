@@ -5,18 +5,17 @@ import { AppComponent } from './app.component';
 import { ChatNavBarComponent } from './chat-nav-bar/chat-nav-bar.component';
 import { ChatThreadsComponent } from './chat-threads/chat-threads.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatNavBarComponent,
     ChatThreadsComponent,
-    ChatWindowComponent
+    ChatWindowComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ThreadsService } from './threads.service';
-import { Message, Thread, User } from './model';
-import { MessagesService } from './services/messages.service';
+import { Message, Thread, User } from '../model';
+import { MessagesService } from './messages.service';
 
 describe('ThreadsService', () => {
   let service: ThreadsService;

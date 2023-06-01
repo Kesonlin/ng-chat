@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ThreadsService } from '../threads.service';
+import { ThreadsService } from '../services/threads.service';
 import { Observable } from 'rxjs';
 import { Thread } from '../model';
 

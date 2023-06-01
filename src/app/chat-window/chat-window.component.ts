@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Message, Thread, User } from '../model';
 import { Observable } from 'rxjs';
 import { MessagesService } from '../services/messages.service';
-import { ThreadsService } from '../threads.service';
+import { ThreadsService } from '../services/threads.service';
 import { UserService } from '../services/user.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-window',
@@ -15,6 +16,7 @@ export class ChatWindowComponent {
   messages: Observable<any>;
   currentThread!: Thread;
   defaultMessage: Message;
+  inputValue: string = '123';
 
   constructor(
     private messageService: MessagesService,
@@ -29,5 +31,14 @@ export class ChatWindowComponent {
     userService.currentUser.subscribe((user: User) => {
       this.currentUser = user;
     });
+  }
+
+  sendMsg() {
+    this.defaultMessage.thread = this.currentThread;
+    this.defaultMessage.isRead = true;
+    this.defaultMessage.author = this.currentUser;
+    this.defaultMessage.text = this.inputValue;
+    this.messageService.addMessage(this.defaultMessage);
+    this.defaultMessage = new Message();
   }
 }

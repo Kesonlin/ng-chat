@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MessagesService } from './services/messages.service';
-import { ThreadsService } from './threads.service';
+import { ThreadsService } from './services/threads.service';
 import { UserService } from './services/user.service';
 import { ChatDataService } from './ChatDataService';
 
